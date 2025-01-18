@@ -6,23 +6,13 @@
 /*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 21:28:33 by hadia             #+#    #+#             */
-/*   Updated: 2025/01/16 17:52:40 by hadia            ###   ########.fr       */
+/*   Updated: 2025/01/18 05:10:32 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*fonction instruction sa*/
-/*fonction instruction sb*/
-/*fonction instruction ss*/
-/*fonction instruction pa*/
-/*fonction instruction pb*/
-/*fonction instruction ra*/
-/*fonction instruction rb*/
-/*fonction instruction rr*/
-/*fonction instruction rrb*/
-/*fonction instruction rrr*/
-/*fonction algo de tri*/
-/*ft_pile_b*/
-/*#include "algo_tri".h
+#include "push_swap.h"
+
+/*fonction creer pile b
 
 ALGORITHM
 h = 1
@@ -48,9 +38,9 @@ public void shellSort(int[] array) {
                array[ j ] = temp;
           }
      }
-} 
-             
-int ft_Vpivot(int *tab)
+}*/
+
+/*int	ft_median(t_list **pile_a)
 {
 	int i, j, temp;
 	int size = ft_strlen(tab);
@@ -60,38 +50,20 @@ int ft_Vpivot(int *tab)
 		return (tab[size / 2 - 1] + tab[size / 2]) / 2;
 	else
 		return tab[size / 2];
-}
-
-
-int *ft_init(int *tab1, int Vpivot)
+}*/
+int ft_sorter(t_list **pile_a, t_list **pile_b)
 {
-	int *tab2;
+// 	int Vpivot = ft_median(pile a);
+// 	t_list **pile_b;
+// 	t_list **pile_a;
 
-	tab2 = malloc(sizeof(tab) * ft_strlen(*tab));
-	while (*tab1++ <= Vpivot)
-	{
-		if (*tab[0] >= Vpivot)
-			ra(tab);
-		pb(*tab[i], *tab2);
-	}
-}
-
-ft_algo_tri(pile a)
-{
-	int pivot;
-	int *pile_b;
-
-	pile_b = ft_pile_b(pile_a);
-	pivot = ft_Vpivot(pile a);
-
-	ft_init(pile_a, pile_b, pivot);
-	- organiser pile a ordre croissant
-	//insertion sort, shell sort 
-	- organiser pile b ordre decroissant
+	// ft_init(pile_a, pile_b, pivot);
+	// // - organiser pile a ordre croissant
+	// //insertion sort, shell sort 
+	// // - organiser pile b ordre decroissant
 	
-	- reinserrer tous les element pile a
-	//print instructions realise suivis de \n 
+	// // - reinserrer tous les element pile a
+	// //print instructions realise suivis de \n 
 
-	return (suites instruction)
+	// return (suites instruction)
 }
-*/

@@ -1,7 +1,5 @@
 #include "push_swap.h"
 
-//initialiation functions (creat pile...)
-
 int	is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
@@ -22,32 +20,13 @@ int is_valid_number(char *av)
 	{
 		if (!is_digit(av[i]))
 			return (0);
-		++;
+		i++;
 	}
 	n = ft_atoi(av);
 	if (n < INT_MIN && n > INT_MAX)
 		return (0);
 	return (1);
 }
-// int check_doubl(int *arr)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	while (av[i])
-// 	{
-// 		j = i + 1;
-// 		while (av[j])
-// 		{
-// 			if (av[i] == av[j])
-// 				return (0);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
 
 int check_doubl(t_stack_node *stack, int n) {
     t_stack_node *current = stack;
@@ -58,6 +37,12 @@ int check_doubl(t_stack_node *stack, int n) {
         current = current->next;
     }
     return (1); // Aucun doublon
+}
+
+t_stack_node *find_last_node(t_stack_node *stack) {
+    while (stack && stack->next)
+        stack = stack->next;
+    return (stack);
 }
 
 void add_node(t_stack_node **stack, int n)
@@ -85,6 +70,15 @@ void add_node(t_stack_node **stack, int n)
 	}
 }
 
+void free_stack(t_stack_node **stack) {
+    t_stack_node *temp;
+    while (*stack) {
+        temp = *stack;
+        *stack = (*stack)->next;
+        free(temp);
+    }
+}
+
 void init_stack_a(t_stack_node **a, char **av)
 {
 	int i = 0;
@@ -94,9 +88,23 @@ void init_stack_a(t_stack_node **a, char **av)
 		if (!(is_valid_number(av[i])))
 			free_stack(a);
 		data = ft_atoi(av[i]);
-		if (!ckeck_doubl(*a, data))
+		if (!(check_doubl(*a, data)))
 			free_stack(a);
 		add_node(a, data);
 		i++;
 	}
+}
+int main(int argc, char **av)
+{
+	t_stack_node	*a;
+	t_stack_node	*b;
+
+	a = NULL;
+	b = NULL;
+	if (argc == 1 || (argc == 2 && !av[1][0]))
+		return (1);
+	else if (argc == 2)
+		av = ft_split(av[1], ' ');
+		init_stack_a(&a, av + 1);
+		return (0);
 }

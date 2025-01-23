@@ -51,19 +51,19 @@ public void shellSort(int[] array) {
 	else
 		return tab[size / 2];
 }*/
-int ft_sorter(t_list **pile_a, t_list **pile_b)
-{
-// 	int Vpivot = ft_median(pile a);
-// 	t_list **pile_b;
-// 	t_list **pile_a;
+// int ft_sorter(t_list **pile_a, t_list **pile_b)
+// {
+// // 	int Vpivot = ft_median(pile a);
+// // 	t_list **pile_b;
+// // 	t_list **pile_a;
 
-	// ft_init(pile_a, pile_b, pivot);
-	// // - organiser pile a ordre croissant
-	// //insertion sort, shell sort 
-	// // - organiser pile b ordre decroissant
+// 	// ft_init(pile_a, pile_b, pivot);
+// 	// // - organiser pile a ordre croissant
+// 	// //insertion sort, shell sort 
+// 	// // - organiser pile b ordre decroissant
 	
-	// // - reinserrer tous les element pile a
-	// //print instructions realise suivis de \n 
+// 	// // - reinserrer tous les element pile a
+// 	// //print instructions realise suivis de \n 
 
-	// return (suites instruction)
-}
+// 	// return (suites instruction)
+// }

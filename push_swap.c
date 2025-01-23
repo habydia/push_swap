@@ -12,46 +12,27 @@
 
 #include "push_swap.h"
 
-/*fonctions
-check argument valide
-fonction check pile a dans ordre croissant
-fonction creer pile b
-fonction algo de tri
-*/
-
-
-// int	ft_is_sort(int **pile)
-// {
-// 	while ()
-// 	{
-		
-// 	}
-// }
-static void push_swap( t_list **pile_a, t_list **pile_b)
-{
-	ft_create_pile(*pile_a);
-	pile_b = NULL;
-	//fonction check pile a dans ordre croissant
-	if (!ft_is_sort(pile_a))
-		ft_sorter(pile_a, pile_b);
-}
-
 int main(int argc, char **av)
- {
+{
+	t_stack_node	*a;
+	t_stack_node	*b;
 
-		t_list *pile_a;
-		t_list *pile_b;
-
-		pile_b = NULL;
-		if (argc < 2)
-			return(NULL);
-		if(argc >= 2)
+	a = NULL;
+	b = NULL;
+	if (argc == 1 || (argc == 2 && !av[1][0]))
+		return (1);
+	else if (argc == 2)
+		av = ft_split(av[1], ' ');
+		init_stack_a(&a, argv + 1);
+		if (!stack_sorted(a))
 		{
-			if (!check_input(av[1]))
-				write(1, "Error\n", 6);
-
+			if (stack_len(a) == 2)
+				sa(&a, false);
+			else if (stack_len(a) == 3 || stack_len(a) == 5)
+				little_sort(&a, &b);
 			else
-				push_swap(pile_a, pile_b);
+				sort_stacks(&a, &b);
 		}
+		free_stack(&a);
 		return (0);
 }

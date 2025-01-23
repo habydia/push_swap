@@ -13,50 +13,35 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <unistd.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
+// # include "printf.h"
 
-//fonction check argument valide
-int check_doubl(char *av);
-int	ft_isdigit(int c);
-int check_input(char *av);
-int ft_atoi(const char *nptr);
-
-//fonction check pile sorted
-int	ft_is_sort(int **pile);
-
-//fonctions instruction 
-void	do_sa(t_list *elem);
-void	do_sb(t_list *elem);
-void	do_ss(t_list *elema, t_list *elem);
-void	do_pa(t_list **lst, t_list *elem);
-void	do_pb(t_list **lst, t_list *elem);
-void	do_ra(t_list **lst, t_list *elem);
-void	do_rb(t_list **lst, t_list *elem);
-void	do_rr(t_list **lst, t_list *elem);
-void	do_rra(t_list **lst, t_list *elem);
-void	do_rrb(t_list **lst, t_list *elem);
-void	do_rrr(t_list **lst, t_list *elem);
-
-//fonctions init
-void	ft_create_pile(t_list *pile_a);
-t_list				*add_to_pile(void *content);
-void				ft_lstadd_front(t_list **lst, t_list *new);
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
-
-//fonction algos de tri
-int ft_sorter(t_list **pile_a, t_list **pile_b);
-int ft_median(t_list **pile_a);
-int ft_litlle_sort(t_list pile_a);
-void increment(void *data);
-//structure pile
-typedef struct s_list
+typedef struct s_stack_node
 {
 	int				data;
-	struct s_list	*elem_next;
-}					t_list;
+	int				index;
+	struct s_stack_node	*next;
+	struct s_stack_node	*prev;
+}					t_stack_node;
 
+//function check input
+//function initialisation pile
+//function initialisation node
+//function utils
+t_stack_node *find_last_node(t_stack_node *stack);
+void free_stack(t_stack_node **stack);
+
+char	**ft_split(char const *s, char c);
+static int	ft_count_word(char *s, char c);
+static void	ft_free_tab(char **tab);
+static int	write_split(char **tab, char const *s, char c);
+int	ft_atoi(const char *nptr);
+int static	ft_check_sign(const char c, int *i);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_empty_substr(void);
+size_t	ft_strlen(const char *s);
+//function sort
 #endif

@@ -47,20 +47,12 @@ void add_node(t_stack_node **stack, int n)
 // 		*lst = new;
 // }
 
-void free_stack(t_stack_node **stack) {
-    t_stack_node *temp;
-    while (*stack) {
-        temp = *stack;
-        *stack = (*stack)->next;
-        free(temp);
-    }
-}
-
 t_stack_node *find_last_node(t_stack_node *stack) {
     while (stack && stack->next)
         stack = stack->next;
     return (stack);
 }
+
 void increment(void *data)
 {
 	int *value = (int *)data;

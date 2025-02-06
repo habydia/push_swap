@@ -6,10 +6,11 @@
 /*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:47 by hadia             #+#    #+#             */
-/*   Updated: 2025/01/18 05:10:18 by hadia            ###   ########.fr       */
+/*   Updated: 2025/02/06 17:54:36 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "push_swap.h"
 
 int main(int argc, char **argv)
@@ -27,10 +28,10 @@ int main(int argc, char **argv)
 		init_stack_a(&a, av + 1);
 		if (!stack_sorted(a))
 		{
-			if (stack_len(a) >= 3 || stack_len(a) == 5)
-				little_sort(&a, &b);
-			else
-				sort_stacks(&a, &b);
+			if (stack_len(a) <= 3)
+				little_sort(a);
+			// else
+			// 	sort_stacks(&a, &b);
 		}
 		free_stack(&a);
 		return (0);

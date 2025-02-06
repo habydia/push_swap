@@ -1,29 +1,31 @@
 #include "push_swap.h"
 
-void add_node(t_stack_node **stack, int n)
+//stack_sorted
+int stack_sorted(t_stack_node *stack)
 {
-	t_stack_node *new_node;
-	t_stack_node *last_node;
-
-	if (!stack)
-		return ;
-		new_node = malloc(sizeof(t_stack_node));
-	if (!new_node)
-		return ;
-	new_node->next = NULL;
-	new_node->data = n;
-	if (!(*stack))
+	while (stack && stack->next)
 	{
-		*stack = new_node;
-		new_node->prev = NULL;
+		if (stack->data > stack->next->data)
+			return (0);
+		stack = stack->next;
 	}
-	else 
-	{
-		last_node = find_last_node(*stack);
-		last_node->next = new_node;
-		new_node->prev = last_node;
-	}
+	return (1);
 }
+//stack_len
+int stack_len(t_stack_node *stack)
+{
+	int i;
+
+	i = 0;
+	while (stack)
+	{
+		i++;
+		stack = stack->next;
+	}
+	return (i);
+}
+
+
 
 // t_list	*ft_lstlast(t_list *lst)
 // {
@@ -47,14 +49,4 @@ void add_node(t_stack_node **stack, int n)
 // 		*lst = new;
 // }
 
-t_stack_node *find_last_node(t_stack_node *stack) {
-    while (stack && stack->next)
-        stack = stack->next;
-    return (stack);
-}
-
-void increment(void *data)
-{
-	int *value = (int *)data;
-	(*value)++;
-}
+/*void increment(void *data)*/

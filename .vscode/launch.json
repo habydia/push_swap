@@ -1,31 +1,31 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
       {
-        "name": "Debug Test",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/test.exe",
-        "args": [
-            "3 2 1 5 4"
-        ],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "gdb",
-        "setupCommands": [
-          {
-            "description": "Enable pretty-printing for gdb",
-            "text": "-enable-pretty-printing",
-            "ignoreFailures": true
+          "name": "Debug Test",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/push_swap",
+          "args": [
+              "10 3 2 1 5 78 1"
+          ],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ],
+          "preLaunchTask": "build",
+          "miDebuggerPath": "/usr/bin/gdb",
+          "logging": {
+              "engineLogging": true
           }
-        ],
-        "preLaunchTask": "build",
-        "miDebuggerPath": "C:/winlibs-x86_64-posix-seh-gcc-14.2.0-mingw-w64ucrt-12.0.0-r2/mingw64/bin/gdb.exe",
-        "logging": {
-          "engineLogging": true
-        }
       }
-    ]
-  }
+  ]
+}

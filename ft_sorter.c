@@ -12,59 +12,66 @@
 
 #include "push_swap.h"
 
-/*fonction creer pile b
-
-ALGORITHM
-h = 1
-while h < n, h = 3*h + 1
-while h > 0,
-    h = h / 3
-    for k = 1:h, insertion sort a[k:h:n]
-    → invariant: each h-sub-array is sorted
-end
-
-Java Code
-public void shellSort(int[] array) {
-     int[] gaps = { 701, 301, 132, 57, 23, 10, 4, 1 };
-     int temp;
-     int i, j;
-
-     for (int gap : gaps) {
-          for (i = gap; i < array.length; i++) {
-               temp = array[ i ];
-               for (j = i; j >= gap && array[ j - gap ] > temp; j -= gap) {
-                    array[ j ] = array[ j - gap ];
-               }
-               array[ j ] = temp;
-          }
-     }
-}*/
-
-/*int	ft_median(t_list **pile_a)
-{
-	int i, j, temp;
-	int size = ft_strlen(tab);
-
-	// Return the median element
-	if (size % 2 == 0)
-		return (tab[size / 2 - 1] + tab[size / 2]) / 2;
-	else
-		return tab[size / 2];
-}*/
-// int ft_sorter(t_list **pile_a, t_list **pile_b)
+// void partition(t_stack_node **a, t_stack_node **b, int pivot)
 // {
-// // 	int Vpivot = ft_median(pile a);
-// // 	t_list **pile_b;
-// // 	t_list **pile_a;
-
-// 	// ft_init(pile_a, pile_b, pivot);
-// 	// // - organiser pile a ordre croissant
-// 	// //insertion sort, shell sort 
-// 	// // - organiser pile b ordre decroissant
-	
-// 	// // - reinserrer tous les element pile a
-// 	// //print instructions realise suivis de \n 
-
-// 	// return (suites instruction)
+//     while (*a)
+//     {
+//         if ((*a)->data < pivot)
+//             pb(a, b);
+//         else
+//             ra(a);
+//     }
 // }
-//sort_stacks
+
+void partition(t_stack_node **a, t_stack_node **b, int pivot)
+{
+    int len = stack_len(*a);
+    int pushed = 0;
+    int rotated = 0;
+
+    for (int i = 0; i < len; i++)
+    {
+        if ((*a)->data < pivot)
+        {
+            pb(a, b); // Push to B if less than pivot
+            pushed++;
+        }
+        else
+        {
+            ra(a); // Rotate A
+            rotated++;
+        }
+    }
+
+    // Undo unnecessary rotations
+    while (rotated--)
+        rra(a);
+}
+
+int find_pivot(t_stack_node *a)
+{
+    if (!a)
+        return 0;
+    return a->data;  
+}
+
+void stack_sorter(t_stack_node **a, t_stack_node **b)
+{
+    int pivot;
+
+    if (stack_len(*a) <= 3)
+    {
+        return(little_sort(a));
+    }
+
+    pivot = find_pivot(*a);
+    partition(a, b, pivot);
+
+    if (*a)
+        stack_sorter(a, b);
+    if (*b)
+        stack_sorter(b, a);
+    
+    while (*b)
+        pa(a, b);
+}

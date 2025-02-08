@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SRC = *.c
-OBJ = $(SRC:.c=.o)
+CFLAGS = -Wall -Wextra -Werror -g
+SRC = ft_init.c ft_init_utils.c ft_little_sort.c push_swap.c ft_sorter.c ft_sorter_utils.c lib_utils.c
+OBJ = $(SRC:.c=.o) 
 NAME = push_swap
 
 all: $(NAME)
@@ -22,7 +22,7 @@ LIBDIR = libft
 LIBFT = $(LIBDIR)/libft.a
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -L$(LIBDIR) -l$(LIBDIR) -I$(LIBDIR) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -L$(LIBDIR) -lft -I$(LIBDIR) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBDIR)
@@ -32,6 +32,7 @@ $(LIBFT):
 clean:
 	rm -f $(OBJ)
 	$(make) -C $(LIBDIR) clean
+
 fclean: clean
 	rm -f $(NAME)
 

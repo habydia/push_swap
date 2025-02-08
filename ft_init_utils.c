@@ -1,13 +1,5 @@
 #include "push_swap.h"
 
-int	is_digit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else 
-		return (0);
-}
-
 int ft_is_valid_number(char *av)
 {
 	int i;
@@ -18,7 +10,7 @@ int ft_is_valid_number(char *av)
 		i++;
 	while(av[i])
 	{
-		if (!is_digit(av[i]))
+		if (!ft_isdigit(av[i]))
 			return (0);
 		i++;
 	}
@@ -49,8 +41,8 @@ void add_node(t_stack_node **stack, int n)
 	t_stack_node *last_node;
 
 	if (!stack)
-		return ;
-		new_node = malloc(sizeof(t_stack_node));
+		return;
+	new_node = malloc(sizeof(t_stack_node));
 	if (!new_node)
 		return ;
 	new_node->next = NULL;

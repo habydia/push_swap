@@ -42,16 +42,20 @@ int stack_len(t_stack_node *stack);
 int stack_sorted(t_stack_node *stack);
 
 char	**ft_split(char const *s, char c);
-static int	ft_count_word(char *s, char c);
-static void	ft_free_tab(char **tab);
-static int	write_split(char **tab, char const *s, char c);
 int	ft_atoi(const char *nptr);
-int static	ft_check_sign(const char c, int *i);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_empty_substr(void);
 size_t	ft_strlen(const char *s);
+
 //function sort
-void swap(t_stack_node **a);
+void sa(t_stack_node **a);
+void ra(t_stack_node **a);
 void rra(t_stack_node **a);
-void little_sort(t_stack_node *a);
+void pb(t_stack_node **a, t_stack_node **b);
+void pa(t_stack_node **a, t_stack_node **b);
+void little_sort(t_stack_node **a);
+int find_median(t_stack_node *a);
+void stack_sorter(t_stack_node **a, t_stack_node **b);
+//function debug
+void print_stack(t_stack_node *stack);
 #endif

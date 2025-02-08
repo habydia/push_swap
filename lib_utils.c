@@ -49,6 +49,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr[j] = 0;
 	return (substr);
 }
+
+/*fonction free tab si echec allocation de ft_substr*/
+
+/*fonction complete tab a l'aide de substr*/
+static void	ft_free_tab(char **tab)
+{
+	int	i;
+	
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 static int	ft_count_word(char *s, char c)
 {
 	int	count;
@@ -71,22 +88,6 @@ static int	ft_count_word(char *s, char c)
 	}
 	return (count);
 }
-
-/*fonction free tab si echec allocation de ft_substr*/
-static void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-/*fonction complete tab a l'aide de substr*/
 static int	write_split(char **tab, char const *s, char c)
 {
 	int	start;
@@ -135,7 +136,7 @@ char	**ft_split(char const *s, char c)
 	tab[words] = NULL;
 	return (tab);
 }
-int static	ft_check_sign(const char c, int *i)
+static int	ft_check_sign(const char c, int *i)
 {
 	int	sign;
 

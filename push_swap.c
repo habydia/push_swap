@@ -10,29 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
+void print_stack(t_stack_node *stack)
+{
+	while (stack)
+	{
+		printf("%d -> ", stack->data);
+		stack = stack->next;
+	}
+	printf("NULL\n");
+}
 int main(int argc, char **argv)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
-	char **av;
-	
-	a = NULL;
-	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc == 2)
-		av = ft_split(argv[1], ' ');
-		init_stack_a(&a, av + 1);
-		if (!stack_sorted(a))
-		{
-			if (stack_len(a) <= 3)
-				little_sort(a);
-			// else
-			// 	sort_stacks(&a, &b);
-		}
-		free_stack(&a);
-		return (0);
+    t_stack_node *a = NULL;
+    t_stack_node *b = NULL;
+    char **av;
+
+    if (argc == 1 || (argc == 2 && !argv[1][0]))
+        return 1;
+    else if (argc == 2)
+        av = ft_split(argv[1], ' ');  // Assuming ft_split is defined elsewhere
+    init_stack_a(&a, av);  // Assuming init_stack_a is defined elsewhere
+
+    printf("Initial stack:\n");
+    print_stack(a);
+
+    if (!stack_sorted(a))
+    {
+        if (stack_len(a) <= 3)
+            little_sort(&a);
+        else
+            stack_sorter(&a, &b);
+    }
+
+    printf("Stack sorted:\n");
+    print_stack(a);
+
+    free_stack(&a);
+    return 0;
 }

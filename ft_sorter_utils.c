@@ -25,28 +25,44 @@ int stack_len(t_stack_node *stack)
 	return (i);
 }
 
+void pb(t_stack_node **a, t_stack_node **b)
+{
+    t_stack_node *temp;
 
+    if (*a)
+    {
+        temp = *a;
+        *a = (*a)->next;
+        temp->next = *b;
+        *b = temp;
+    }
+}
 
-// t_list	*ft_lstlast(t_list *lst)
-// {
-// 	if (!lst)
-// 		return (NULL);
-// 	while (lst->next)
-// 	{
-// 		lst = lst->next;
-// 	}
-// 	return (lst);
-// }
-// void	ft_lstadd_back(t_list **lst, t_list *new)
-// {
-// 	if (!lst || !new)
-// 		return ;
-// 	if (*lst)
-// 	{
-// 		ft_lstlast(*lst)-> next = new;
-// 	}
-// 	else
-// 		*lst = new;
-// }
+void pa(t_stack_node **a, t_stack_node **b)
+{
+    t_stack_node *temp;
 
-/*void increment(void *data)*/
+    if (*b)
+    {
+        temp = *b;
+        *b = (*b)->next;
+        temp->next = *a;
+        *a = temp;
+    }
+}
+
+void ra(t_stack_node **a)
+{
+    t_stack_node *temp;
+    
+    if (*a && (*a)->next)
+    {
+        temp = *a;
+        *a = (*a)->next;
+        temp->next = NULL;
+        t_stack_node *last = *a;
+        while (last->next)
+            last = last->next;
+        last->next = temp;
+    }
+}

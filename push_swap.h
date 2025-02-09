@@ -56,6 +56,4 @@ void pa(t_stack_node **a, t_stack_node **b);
 void little_sort(t_stack_node **a);
 int find_median(t_stack_node *a);
 void stack_sorter(t_stack_node **a, t_stack_node **b);
-//function debug
-void print_stack(t_stack_node *stack);
 #endif

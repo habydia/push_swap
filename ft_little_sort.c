@@ -15,6 +15,7 @@ void sa(t_stack_node **a)
     (*a)->prev = NULL;
     (*a)->next = temp;
     temp->prev = *a;
+    write(1, "sa\n", 3);
 }
 //check 
 void rra(t_stack_node **a)
@@ -36,6 +37,8 @@ void rra(t_stack_node **a)
     last->prev = NULL;
     (*a)->prev = last;
     *a = last;
+
+    write(1, "rra\n", 4);
 }
 
 void little_sort(t_stack_node **a)

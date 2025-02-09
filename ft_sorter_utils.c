@@ -36,6 +36,7 @@ void pb(t_stack_node **a, t_stack_node **b)
         temp->next = *b;
         *b = temp;
     }
+    write(1, "pb\n", 3);
 }
 
 void pa(t_stack_node **a, t_stack_node **b)
@@ -49,6 +50,7 @@ void pa(t_stack_node **a, t_stack_node **b)
         temp->next = *a;
         *a = temp;
     }
+    write(1, "pa\n", 3);
 }
 
 void ra(t_stack_node **a)
@@ -65,4 +67,5 @@ void ra(t_stack_node **a)
             last = last->next;
         last->next = temp;
     }
+    write(1, "ra\n", 3);
 }

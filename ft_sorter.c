@@ -9,19 +9,7 @@
 /*   Updated: 2025/02/06 17:19:50 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "push_swap.h"
-
-// void partition(t_stack_node **a, t_stack_node **b, int pivot)
-// {
-//     while (*a)
-//     {
-//         if ((*a)->data < pivot)
-//             pb(a, b);
-//         else
-//             ra(a);
-//     }
-// }
 
 void partition(t_stack_node **a, t_stack_node **b, int pivot)
 {
@@ -51,43 +39,97 @@ void partition(t_stack_node **a, t_stack_node **b, int pivot)
         rra(a);
 }
 
+
 int find_pivot(t_stack_node *a) 
 {
     if (!a) return 0;
 
-    t_stack_node *slow = a, *fast = a;
+    int len = stack_len(a);
+    int mid = len / 2;
+    t_stack_node *current = a;
 
-    while (fast && fast->next) 
-    {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
+    for (int i = 0; i < mid; i++)
+        current = current->next;  
 
-    return slow->data;  // Pivot is the middle element
+    return current->data;  // Closer to a median choice
 }
 
+static void insert_sorted(t_stack_node **a, t_stack_node *node)
+{
+    if (!(*a) || (*a)->data >= node->data) {
+        node->next = *a;
+        if (*a) {
+            (*a)->prev = node;
+        }
+        *a = node;
+    } else {
+        t_stack_node *current = *a;
+        while (current->next && current->next->data < node->data) {
+            current = current->next;
+        }
+        node->next = current->next;
+        if (current->next) {
+            current->next->prev = node;
+        }
+        current->next = node;
+        node->prev = current;
+    }
+}
+
+// Sort the stack a with elements from stack b
 void stack_sorter(t_stack_node **a, t_stack_node **b) 
 {
-    int pivot;
-
     if (!a || !(*a))
         return;
-        
-    if (stack_len(*a) <= 3)
+
+    // If the stack has 3 or fewer elements, use a simpler sort
+    if (stack_len(*a) <= 3) 
     {
         little_sort(a);
         return;
     }
 
-    pivot = find_pivot(*a);
-    partition(a, b, pivot);
+    // Find pivot
+    int pivot = find_pivot(*a);
+    partition(a, b, pivot);  // Partition based on pivot
 
-    little_sort(a);  // Sort remaining 3 numbers in A
+    little_sort(a);  // Sort remaining 3 elements in a
 
+    // Reinsert elements from b into a in sorted order
     while (*b)
     {
-        pa(a, b);
-        if ((*a)->data > (*a)->next->data) // Ensure order
-            sa(a);
+        t_stack_node *node = *b;
+        *b = (*b)->next;
+        node->next = NULL;  // Detach node from b
+
+        insert_sorted(a, node);
     }
 }
+
+
+// void stack_sorter(t_stack_node **a, t_stack_node **b) 
+// {
+//     int pivot;
+
+//     if (!a || !(*a))
+//         return;
+        
+//     if (stack_len(*a) <= 3)
+//     {
+//         little_sort(a);
+//         return;
+//     }
+
+//     pivot = find_pivot(*a);
+//     partition(a, b, pivot);
+
+//     little_sort(a);  // Sort remaining 3 numbers in A
+
+//     while (*b)
+//     {
+//         pa(a, b);
+//         if ((*a)->data > (*a)->next->data) // Ensure order
+//             sa(a);
+//     }
+// }
+

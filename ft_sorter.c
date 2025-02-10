@@ -14,10 +14,11 @@
 void partition(t_stack_node **a, t_stack_node **b, int pivot)
 {
     int len = stack_len(*a);
-    int pushed = 0, rotated = 0;
+    int pushed = 0;
     int limit = len - 3;  // Leave last 3 elements
-
-    while (pushed < limit)
+    int max_it = len * 2;
+    int it = 0;
+    while (pushed < limit && it < max_it)
     {
         if (!(*a)) 
             break;
@@ -28,17 +29,15 @@ void partition(t_stack_node **a, t_stack_node **b, int pivot)
             pushed++;
         }
         else
-        {
             ra(a);
-            rotated++;
-        }
+        it++;
     }
-
-    // Restore order in A
-    while (rotated-- > 0)
-        rra(a);
+    while(len - pushed > 3)
+    {
+        pb(a, b);
+        pushed++;
+    }
 }
-
 
 int find_pivot(t_stack_node *a) 
 {
@@ -79,30 +78,18 @@ static void insert_sorted(t_stack_node **a, t_stack_node *node)
 // Sort the stack a with elements from stack b
 void stack_sorter(t_stack_node **a, t_stack_node **b) 
 {
-    if (!a || !(*a))
-        return;
-
-    // If the stack has 3 or fewer elements, use a simpler sort
-    if (stack_len(*a) <= 3) 
-    {
-        little_sort(a);
-        return;
-    }
-
     // Find pivot
     int pivot = find_pivot(*a);
     partition(a, b, pivot);  // Partition based on pivot
-
     little_sort(a);  // Sort remaining 3 elements in a
-
     // Reinsert elements from b into a in sorted order
     while (*b)
     {
-        t_stack_node *node = *b;
+        t_stack_node *temp = *b;
         *b = (*b)->next;
-        node->next = NULL;  // Detach node from b
+        temp->next = NULL;  // Detach node from b
 
-        insert_sorted(a, node);
+        insert_sorted(a, temp);
     }
 }
 

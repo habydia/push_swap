@@ -41,6 +41,29 @@ void rra(t_stack_node **a)
     write(1, "rra\n", 4);
 }
 
+void rrb(t_stack_node **b)
+{
+    t_stack_node *last;
+    t_stack_node *before_last;
+
+    if (!b || !*b || !(*b)->next)
+        return;
+
+    last = find_last_node(*b);
+    before_last = *b;
+
+    while (before_last->next != last)
+        before_last = before_last->next;
+
+    before_last->next = NULL;
+    last->next = *b;
+    last->prev = NULL;
+    (*b)->prev = last;
+    *b = last;
+
+    write(1, "rrb\n", 4);
+}
+
 void little_sort(t_stack_node **a)
 {
     if (stack_len(*a) == 2) 

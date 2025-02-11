@@ -50,10 +50,13 @@ size_t	ft_strlen(const char *s);
 //function sort
 void sa(t_stack_node **a);
 void ra(t_stack_node **a);
+void rb(t_stack_node **b);
 void rra(t_stack_node **a);
+void rrb(t_stack_node **b);
 void pb(t_stack_node **a, t_stack_node **b);
 void pa(t_stack_node **a, t_stack_node **b);
 void little_sort(t_stack_node **a);
 int find_median(t_stack_node *a);
 void stack_sorter(t_stack_node **a, t_stack_node **b);
+int find_max_position(t_stack_node *stack);
 #endif

@@ -69,3 +69,20 @@ void ra(t_stack_node **a)
     }
     write(1, "ra\n", 3);
 }
+
+void rb(t_stack_node **b)
+{
+    t_stack_node *temp;
+    
+    if (*b && (*b)->next)
+    {
+        temp = *b;
+        *b = (*b)->next;
+        temp->next = NULL;
+        t_stack_node *last = *b;
+        while (last->next)
+            last = last->next;
+        last->next = temp;
+    }
+    write(1, "rb\n", 3);
+}

@@ -10,128 +10,106 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
-
-int find_max_position(t_stack_node *stack)
+int find_pivot(t_stack_node *stack)
 {
-    t_stack_node *current = stack;
-    int max = INT_MIN;
-    int pos = 0;
-    int max_pos = 0;
+    int min;
+    int max;
+    t_stack_node *current;
+
+    if (!stack)
+        return (0);
+
+    // Trouve min et max
+    min = stack->data;
+    max = stack->data;
+    current = stack;
     
     while (current)
     {
+        if (current->data < min)
+            min = current->data;
         if (current->data > max)
-        {
             max = current->data;
-            max_pos = pos;
-        }
-        pos++;
         current = current->next;
     }
-    return max_pos;
+
+    // Retourne la valeur approximative du milieu
+    return (min + ((max - min) / 2));
 }
-
-void find_best_move(t_stack_node *b, int *moves, int *reverse)
-{
-    int size = stack_len(b);
-    int max_pos = find_max_position(b);
-    
-    if (max_pos <= size / 2)
-    {
-        *moves = max_pos;
-        *reverse = 0;
-    }
-    else
-    {
-        *moves = size - max_pos;
-        *reverse = 1;
-    }
-}
-
-int find_median(t_stack_node *a)
-{
-    int *arr;
-    int len;
-    int median;
-    int i;
-    t_stack_node *tmp;
-
-    len = stack_len(a);
-    arr = malloc(sizeof(int) * len);
-    i = 0;
-    tmp = a;
-    
-    while (tmp)
-    {
-        arr[i++] = tmp->data;
-        tmp = tmp->next;
-    }
-    
-    // Tri simple du tableau
-    for (i = 0; i < len - 1; i++)
-    {
-        for (int j = 0; j < len - i - 1; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
-        }
-    }
-    
-    median = arr[len / 2];
-    free(arr);
-    return median;
-}
-
 void stack_sorter(t_stack_node **a, t_stack_node **b)
 {
-    int median;
-    int push_count;
+    int pivot;
     int len;
 
-    while (stack_len(*a) > 3)
+    len = stack_len(*a);
+    while (len > 3)
     {
-        median = find_median(*a);
-        len = stack_len(*a);
-        push_count = 0;
-
-        // Pousse tous les nombres inférieurs à la médiane vers B
-        while (push_count < len / 2)
+        pivot = find_pivot(*a);
+        
+        // Compte combien d'éléments sont sous le pivot
+        int count = 0;
+        t_stack_node *tmp = *a;
+        while (tmp)
         {
-            if ((*a)->data < median)
+            if (tmp->data <= pivot)
+                count++;
+            tmp = tmp->next;
+        }
+
+        // Push les éléments inférieurs au pivot vers B
+        int pushed = 0;
+        while (pushed < count && len > 3)
+        {
+            if ((*a)->data <= pivot)
             {
                 pb(a, b);
-                push_count++;
+                pushed++;
+                len--;
             }
             else
                 ra(a);
         }
     }
 
-    // Trie les 3 derniers nombres dans A
+    // Trie les 3 derniers éléments
     little_sort(a);
 
-    // Ramène les nombres de B vers A dans l'ordre
+    // Ramène les éléments de B vers A
     while (*b)
     {
-        int max_pos = find_max_position(*b);
-        int size = stack_len(*b);
+        int best_move = INT_MAX;
+        // int best_ra = 0;
+        int best_rb = 0;
         
-        // Faire la rotation en une seule fois avec rb ou rrb
-        if (max_pos <= size / 2)
+        // Trouve la position optimale
+        t_stack_node *tmp_b = *b;
+        int i = 0;
+        while (tmp_b)
         {
-            while (max_pos--)
-                rb(b);
+            int moves = i;
+            if (i > stack_len(*b) / 2)
+                moves = stack_len(*b) - i;
+            
+            if (moves < best_move)
+            {
+                best_move = moves;
+                best_rb = i;
+            }
+            tmp_b = tmp_b->next;
+            i++;
         }
+
+        // Exécute les mouvements optimaux
+        if (best_rb <= stack_len(*b) / 2)
+            while (best_rb--)
+                rb(b);
         else
         {
-            int moves = size - max_pos;
-            while (moves--)
+            best_rb = stack_len(*b) - best_rb;
+            while (best_rb--)
                 rrb(b);
         }
+        
         pa(a, b);
     }
 }

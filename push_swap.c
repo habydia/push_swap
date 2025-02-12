@@ -31,10 +31,12 @@ int main(int argc, char **argv)
         return 1;
     else if (argc == 2)
         av = ft_split(argv[1], ' ');  // Assuming ft_split is defined elsewhere
+    else 
+        av = argv + 1;
     init_stack_a(&a, av);  // Assuming init_stack_a is defined elsewhere
 
-    printf("Initial stack:\n");
-    print_stack(a);
+    // printf("Initial stack:\n");
+    // print_stack(a);
 
     if (!stack_sorted(a))
     {

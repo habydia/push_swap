@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 //stack_sorted
-int stack_sorted(t_stack_node *stack)
+int stack_is_sorted(t_stack_node *stack)
 {
 	while (stack && stack->next)
 	{

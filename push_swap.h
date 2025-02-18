@@ -56,7 +56,10 @@ void rrb(t_stack_node **b);
 void pb(t_stack_node **a, t_stack_node **b);
 void pa(t_stack_node **a, t_stack_node **b);
 void little_sort(t_stack_node **a);
-int find_median(t_stack_node *a);
-void stack_sorter(t_stack_node **a, t_stack_node **b);
-int find_max_position(t_stack_node *stack);
+int stack_is_sorted(t_stack_node *stack);
+void index_stack(t_stack_node *stack);
+void big_sort(t_stack_node **a, t_stack_node **b);
+int find_max(t_stack_node *stack);
+int find_min(t_stack_node *stack);
+void find_position_and_insert(t_stack_node **a, t_stack_node **b);
 #endif

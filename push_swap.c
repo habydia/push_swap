@@ -12,15 +12,15 @@
 
 #include "push_swap.h"
 
-void print_stack(t_stack_node *stack)
-{
-	while (stack)
-	{
-		printf("%d -> ", stack->data);
-		stack = stack->next;
-	}
-	printf("NULL\n");
-}
+// void print_stack(t_stack_node *stack)
+// {
+// 	while (stack)
+// 	{
+// 		printf("%d -> ", stack->data);
+// 		stack = stack->next;
+// 	}
+// 	printf("NULL\n");
+// }
 int main(int argc, char **argv)
 {
     t_stack_node *a = NULL;
@@ -38,16 +38,16 @@ int main(int argc, char **argv)
     // printf("Initial stack:\n");
     // print_stack(a);
 
-    if (!stack_sorted(a))
+    if (!stack_is_sorted(a))
     {
         if (stack_len(a) <= 3)
             little_sort(&a);
         else
-            stack_sorter(&a, &b);
+            big_sort(&a, &b);
     }
 
-    printf("Stack sorted:\n");
-    print_stack(a);
+    // printf("Stack sorted:\n");
+    // print_stack(a);
 
     free_stack(&a);
     return 0;

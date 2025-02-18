@@ -31,9 +31,10 @@ $(LIBFT):
 
 clean:
 	rm -f $(OBJ)
-	$(make) -C $(LIBDIR) clean
+	cd $(LIBDIR) && make clean
 
 fclean: clean
 	rm -f $(NAME)
+	cd $(LIBDIR) && make fclean
 
 re: all clean fclean re

@@ -40,7 +40,6 @@ int is_next_min_or_max(t_stack_node *a, t_stack_node *b)
     return 0; // a n'est ni le min ni le max
 }
 
-
 int get_closest_to_min_or_max(t_stack_node *a, t_stack_node *b)
 {
     if (!a || !b)
@@ -61,23 +60,25 @@ void parse_b(t_stack_node **a, t_stack_node **b, int size) {
     int chunk_size = size / 5; // Divide into 5 chunks
     int min = find_min(*a)->data;
     int pivot = min + chunk_size;
+    int pushed = 0;
 
     while (stack_len(*a) > 3) {
         if ((*a)->data <= pivot) { 
             pb(a, b);
-            if (*b && stack_len(*b) > 1 && (*b)->data < pivot / 2)
+            pushed++;
+            if (*b && stack_len(*b) > 1 && (*b)->data < pivot - (chunk_size / 2)) {
                 rotate(b, 'b'); // Keep smaller elements lower
+            }
         } else {
-            if (stack_len(*b) < chunk_size) // Only rotate when necessary
-                rotate(a, 'a');
-            else
-                pivot += chunk_size; // Move to next chunk
+            if (pushed < chunk_size) {  
+                rotate(a, 'a'); // Rotate only if we haven’t pushed enough
+            } else {
+                pivot += chunk_size; // Move to the next chunk
+                pushed = 0; // Reset counter for next chunk
+            }
         }
     }
 }
-
-
-
 
 int find_best_insert_position(t_stack_node *a, int value) {
     if (!a) return 0;
@@ -105,17 +106,18 @@ int find_best_insert_position(t_stack_node *a, int value) {
 
     return best_index; // Fallback (shouldn't be reached)
 }
-
 void move_to_position(t_stack_node **stack, int pos, char stack_name) {
     int len = stack_len(*stack);
-    int moves_up = pos;
-    int moves_down = len - pos;
+    if (pos == 0) return; // Already in position
 
-    if (moves_up <= moves_down) { // Rotate upwards
-        while (moves_up-- > 0)
+    if (pos <= len / 2) { 
+        // Rotate upwards (ra)
+        while (pos-- > 0)
             rotate(stack, stack_name);
-    } else { // Rotate downwards
-        while (moves_down-- > 0)
+    } else {
+        // Rotate downwards (rra)
+        pos = len - pos;
+        while (pos-- > 0)
             reverse_rotate(stack, stack_name);
     }
 }

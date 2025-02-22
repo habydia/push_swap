@@ -43,7 +43,7 @@ int main(int argc, char **argv)
         if (stack_len(a) <= 3)
             little_sort(&a);
         else
-            big_sort(&a, &b);
+            sorter(&a, &b);
     }
 
     printf("Stack sorted:\n");

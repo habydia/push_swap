@@ -11,8 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+static void	ft_free_tab(char **tab)
+{
+	int	i;
+	
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
-/*fonction compte nombre mot dans s*/
 static int	ft_count_word(char *s, char c)
 {
 	int	count;
@@ -35,22 +46,6 @@ static int	ft_count_word(char *s, char c)
 	}
 	return (count);
 }
-
-/*fonction free tab si echec allocation de ft_substr*/
-static void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-/*fonction complete tab a l'aide de substr*/
 static int	write_split(char **tab, char const *s, char c)
 {
 	int	start;
@@ -99,6 +94,7 @@ char	**ft_split(char const *s, char c)
 	tab[words] = NULL;
 	return (tab);
 }
+
 /*int main(int argc, char **argv)
 {
 		if (argc != 3)

@@ -11,6 +11,16 @@ int stack_is_sorted(t_stack_node *stack)
 	}
 	return (1);
 }
+
+t_stack_node *get_last(t_stack_node *stack)
+{
+    if (!stack)
+        return NULL;
+    while (stack->next)
+        stack = stack->next;
+    return stack;
+}
+
 //stack_len
 int stack_len(t_stack_node *stack)
 {
@@ -25,64 +35,4 @@ int stack_len(t_stack_node *stack)
 	return (i);
 }
 
-void pb(t_stack_node **a, t_stack_node **b)
-{
-    t_stack_node *temp;
 
-    if (*a)
-    {
-        temp = *a;
-        *a = (*a)->next;
-        temp->next = *b;
-        *b = temp;
-    }
-    write(1, "pb\n", 3);
-}
-
-void pa(t_stack_node **a, t_stack_node **b)
-{
-    t_stack_node *temp;
-
-    if (*b)
-    {
-        temp = *b;
-        *b = (*b)->next;
-        temp->next = *a;
-        *a = temp;
-    }
-    write(1, "pa\n", 3);
-}
-
-void ra(t_stack_node **a)
-{
-    t_stack_node *temp;
-    
-    if (*a && (*a)->next)
-    {
-        temp = *a;
-        *a = (*a)->next;
-        temp->next = NULL;
-        t_stack_node *last = *a;
-        while (last->next)
-            last = last->next;
-        last->next = temp;
-    }
-    write(1, "ra\n", 3);
-}
-
-void rb(t_stack_node **b)
-{
-    t_stack_node *temp;
-    
-    if (*b && (*b)->next)
-    {
-        temp = *b;
-        *b = (*b)->next;
-        temp->next = NULL;
-        t_stack_node *last = *b;
-        while (last->next)
-            last = last->next;
-        last->next = temp;
-    }
-    write(1, "rb\n", 3);
-}

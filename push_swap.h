@@ -72,6 +72,6 @@ t_stack_node *get_last(t_stack_node *stack);
 int get_position(t_stack_node *stack, int value);
 
 void reintegrate_sorted(t_stack_node **a, t_stack_node **b);
-void parse_b(t_stack_node **a, t_stack_node **b);
+void parse_b(t_stack_node **a, t_stack_node **b, int size);
 void print_stack(t_stack_node *stack);
 #endif

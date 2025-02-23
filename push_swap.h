@@ -70,8 +70,9 @@ void rotate_until_top(t_stack_node **stack, int value, char stack_name);
 void rotate(t_stack_node **stack, char stack_name);
 t_stack_node *get_last(t_stack_node *stack);
 int get_position(t_stack_node *stack, int value);
-
+int calculate_move_cost(t_stack_node *a, t_stack_node *b, int value);
 void reintegrate_sorted(t_stack_node **a, t_stack_node **b);
 void parse_b(t_stack_node **a, t_stack_node **b, int size);
-void print_stack(t_stack_node *stack);
+// void print_stack(t_stack_node *stack);
+int find_best_insert_position(t_stack_node *a, int value);
 #endif

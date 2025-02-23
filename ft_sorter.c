@@ -80,42 +80,46 @@ void parse_b(t_stack_node **a, t_stack_node **b, int size) {
     }
 }
 
-int find_best_insert_position(t_stack_node *a, int value) {
-    if (!a) return 0;
+int calculate_move_cost(t_stack_node *a, t_stack_node *b, int value) {
+    int pos_in_a = find_best_insert_position(a, value);
+    int pos_in_b = get_position(b, value);
+    int len_a = stack_len(a);
+    int len_b = stack_len(b);
 
-    int index = 0, best_index = 0;
-    t_stack_node *current = a;
-    t_stack_node *min_node = find_min(a);
-    t_stack_node *max_node = find_max(a);
+    // Cost to move value to top of 'b'
+    int move_b = (pos_in_b <= len_b / 2) ? pos_in_b : len_b - pos_in_b;
+    // Cost to move value to correct position in 'a'
+    int move_a = (pos_in_a <= len_a / 2) ? pos_in_a : len_a - pos_in_a;
 
-    // Case 1: Smallest element, insert before min
-    if (value < min_node->data)
-        return get_position(a, min_node->data);
+    return move_a + move_b;
+}
 
-    // Case 2: Largest element, insert after max
-    if (value > max_node->data)
-        return (get_position(a, max_node->data) + 1) % stack_len(a);
+t_stack_node *find_best_element_to_move(t_stack_node *a, t_stack_node *b) {
+    t_stack_node *best = b;
+    t_stack_node *current = b;
+    int min_cost = calculate_move_cost(a, b, current->data);
 
-    // Case 3: Normal insertion between two values
-    while (current->next) {
-        if (current->data < value && current->next->data > value)
-            return index + 1;
-        index++;
+    while (current) {
+        int cost = calculate_move_cost(a, b, current->data);
+        if (cost < min_cost) {
+            min_cost = cost;
+            best = current;
+        }
         current = current->next;
     }
 
-    return best_index; // Fallback (shouldn't be reached)
+    return best;
 }
-void move_to_position(t_stack_node **stack, int pos, char stack_name) {
-    int len = stack_len(*stack);
-    if (pos == 0) return; // Already in position
 
-    if (pos <= len / 2) { 
-        // Rotate upwards (ra)
+void move_to_position(t_stack_node **stack, int pos, char stack_name) { 
+    int len = stack_len(*stack);
+    if (pos == 0) return;
+
+    int half = len / 2;
+    if (pos <= half) {
         while (pos-- > 0)
             rotate(stack, stack_name);
     } else {
-        // Rotate downwards (rra)
         pos = len - pos;
         while (pos-- > 0)
             reverse_rotate(stack, stack_name);
@@ -125,13 +129,15 @@ void move_to_position(t_stack_node **stack, int pos, char stack_name) {
 
 void reintegrate_sorted(t_stack_node **a, t_stack_node **b) {
     while (*b) {
-        int best_pos = find_best_insert_position(*a, (*b)->data);
-        move_to_position(a, best_pos, 'a');
+        t_stack_node *best = find_best_element_to_move(*a, *b);
+        move_to_position(b, get_position(*b, best->data), 'b');
+        move_to_position(a, find_best_insert_position(*a, best->data), 'a');
         pa(a, b);
     }
+
+    // Ensure final stack is sorted
     rotate_until_top(a, find_min(*a)->data, 'a');
 }
-
 
 void sorter(t_stack_node **a, t_stack_node **b) {
     int size = stack_len(*a);

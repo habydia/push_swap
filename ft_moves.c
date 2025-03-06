@@ -69,3 +69,19 @@ void rotate(t_stack_node **stack, char stack_name)
         write(1, "rb\n", 3);
 }
 
+void rotate_both(t_stack_node **a, t_stack_node **b)
+{
+    rotate(a, 'c');
+    rotate(b, 'c');
+    write(1, "rr\n", 3);
+}
+
+void reverse_rotate_both(t_stack_node **a, t_stack_node **b)
+{
+    reverse_rotate(a, 'c');
+    reverse_rotate(b, 'c');
+    write(1, "rrr\n", 4);
+}
+
+
+

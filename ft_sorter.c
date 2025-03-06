@@ -86,10 +86,19 @@ int calculate_move_cost(t_stack_node *a, t_stack_node *b, int value) {
     int len_a = stack_len(a);
     int len_b = stack_len(b);
 
-    // Cost to move value to top of 'b'
-    int move_b = (pos_in_b <= len_b / 2) ? pos_in_b : len_b - pos_in_b;
-    // Cost to move value to correct position in 'a'
-    int move_a = (pos_in_a <= len_a / 2) ? pos_in_a : len_a - pos_in_a;
+    int move_b;
+    if (pos_in_b <= len_b / 2) {
+        move_b = pos_in_b;
+    } else {
+        move_b = len_b - pos_in_b;
+    }
+
+    int move_a;
+    if (pos_in_a <= len_a / 2) {
+        move_a = pos_in_a;
+    } else {
+        move_a = len_a - pos_in_a;
+    }
 
     return move_a + move_b;
 }

@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:54 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/06 21:54:00 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/06 22:15:25 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ t_stack_node *find_last_node(t_stack_node *stack);
 void free_stack(t_stack_node **stack);
 int stack_len(t_stack_node *stack);
 int stack_sorted(t_stack_node *stack);
+void	handle_push_to_b(t_stack_node **a, t_stack_node **b, int pivot,
+	int chunk_size);
+void	handle_rotation(t_stack_node **a, int *pushed, int *pivot,
+		int chunk_size);
 
 char	**ft_split(char const *s, char c);
 int	ft_atoi(const char *nptr);

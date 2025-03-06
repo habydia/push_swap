@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:47 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/06 21:29:21 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/06 22:17:23 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ void	free_stack(t_stack_node **stack)
 		temp = *stack;
 		*stack = (*stack)->next;
 		free(temp);
+	}
+}
+
+void	handle_rotation(t_stack_node **a, int *pushed, int *pivot,
+	int chunk_size)
+{
+	if (*pushed < chunk_size)
+		rotate(a, 'a');
+	else
+	{
+		*pivot += chunk_size;
+		*pushed = 0;
 	}
 }
 

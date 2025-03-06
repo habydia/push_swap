@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:26 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/06 22:06:40 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/06 22:17:47 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,13 @@ int	get_closest_to_min_or_max(t_stack_node *a, t_stack_node *b)
  * Rotate only if we haven’t pushed enough
  * Move to the next chunk
  * Reset counter for next chunk */
-static void	handle_push_to_b(t_stack_node **a, t_stack_node **b, int pivot,
-	int chunk_size)
-{
-	pb(a, b);
-	if (*b && stack_len(*b) > 1 && (*b)->data < pivot - (chunk_size / 2))
-		rotate(b, 'b');
-}
-
-static void	handle_rotation(t_stack_node **a, int *pushed, int *pivot,
-	int chunk_size)
-{
-	if (*pushed < chunk_size)
-		rotate(a, 'a');
-	else
-	{
-		*pivot += chunk_size;
-		*pushed = 0;
-	}
-}
-
 void	parse_b(t_stack_node **a, t_stack_node **b, int size)
 {
 	int	min;
 	int	pivot;
-	int	pushed; 
+	int	pushed;
 	int	chunk_size;
-	
+
 	chunk_size = size / 5;
 	min = find_min(*a)->data;
 	pivot = min + chunk_size;

@@ -1,163 +1,136 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sorter.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 13:53:26 by hvby              #+#    #+#             */
+/*   Updated: 2025/03/06 22:06:40 by Hadia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_stack_node *find_min(t_stack_node *stack)
+/*
+ * Aucun élément à comparer
+ * a est le nouveau min
+ * a est le nouveau max
+ * a n'est ni le min ni le max
+ */
+
+/*Plus proche du min
+ Plus proche du max */
+int	get_closest_to_min_or_max(t_stack_node *a, t_stack_node *b)
 {
-    t_stack_node *min_node = stack;
-    while (stack)
-    {
-        if (stack->data < min_node->data)
-            min_node = stack;
-        stack = stack->next;
-    }
-    return min_node;
+	t_stack_node	*min_b;
+	t_stack_node	*max_b;
+	int				dist_min;
+	int				dist_max;
+
+	if (!a || !b)
+		return (0);
+	min_b = find_min(b);
+	max_b = find_max(b);
+	dist_min = abs(a->data - min_b->data);
+	dist_max = abs(a->data - max_b->data);
+	if (dist_min < dist_max)
+		return (-1);
+	return (1);
 }
 
-t_stack_node *find_max(t_stack_node *stack)
+/* Keep smaller elements lower
+ * Rotate only if we haven’t pushed enough
+ * Move to the next chunk
+ * Reset counter for next chunk */
+static void	handle_push_to_b(t_stack_node **a, t_stack_node **b, int pivot,
+	int chunk_size)
 {
-    t_stack_node *max_node = stack;
-    while (stack)
-    {
-        if (stack->data > max_node->data)
-            max_node = stack;
-        stack = stack->next;
-    }
-    return max_node;
+	pb(a, b);
+	if (*b && stack_len(*b) > 1 && (*b)->data < pivot - (chunk_size / 2))
+		rotate(b, 'b');
 }
 
-int is_next_min_or_max(t_stack_node *a, t_stack_node *b)
+static void	handle_rotation(t_stack_node **a, int *pushed, int *pivot,
+	int chunk_size)
 {
-    if (!a || !b)
-        return 0; // Aucun élément à comparer
-
-    t_stack_node *min_b = find_min(b);
-    t_stack_node *max_b = find_max(b);
-
-    if (a->data < min_b->data)
-        return -1; // a est le nouveau min
-    if (a->data > max_b->data)
-        return 1;  // a est le nouveau max
-
-    return 0; // a n'est ni le min ni le max
+	if (*pushed < chunk_size)
+		rotate(a, 'a');
+	else
+	{
+		*pivot += chunk_size;
+		*pushed = 0;
+	}
 }
 
-int get_closest_to_min_or_max(t_stack_node *a, t_stack_node *b)
+void	parse_b(t_stack_node **a, t_stack_node **b, int size)
 {
-    if (!a || !b)
-        return 0; // Sécurité : éviter les erreurs sur liste vide
-
-    t_stack_node *min_b = find_min(b);
-    t_stack_node *max_b = find_max(b);
-
-    int dist_min = abs(a->data - min_b->data);
-    int dist_max = abs(a->data - max_b->data);
-
-    if (dist_min < dist_max)
-        return -1; // Plus proche du min
-    return 1;      // Plus proche du max
+	int	min;
+	int	pivot;
+	int	pushed; 
+	int	chunk_size;
+	
+	chunk_size = size / 5;
+	min = find_min(*a)->data;
+	pivot = min + chunk_size;
+	pushed = 0;
+	while (stack_len(*a) > 3)
+	{
+		if ((*a)->data <= pivot)
+		{
+			handle_push_to_b(a, b, pivot, chunk_size);
+			pushed++;
+		}
+		else
+			handle_rotation(a, &pushed, &pivot, chunk_size);
+	}
 }
 
-void parse_b(t_stack_node **a, t_stack_node **b, int size) {
-    int chunk_size = size / 5; // Divide into 5 chunks
-    int min = find_min(*a)->data;
-    int pivot = min + chunk_size;
-    int pushed = 0;
+void	move_to_position(t_stack_node **stack, int pos, char stack_name)
+{
+	int	len;
+	int	half;
 
-    while (stack_len(*a) > 3) {
-        if ((*a)->data <= pivot) { 
-            pb(a, b);
-            pushed++;
-            if (*b && stack_len(*b) > 1 && (*b)->data < pivot - (chunk_size / 2)) {
-                rotate(b, 'b'); // Keep smaller elements lower
-            }
-        } else {
-            if (pushed < chunk_size) {  
-                rotate(a, 'a'); // Rotate only if we haven’t pushed enough
-            } else {
-                pivot += chunk_size; // Move to the next chunk
-                pushed = 0; // Reset counter for next chunk
-            }
-        }
-    }
+	len = stack_len(*stack);
+	if (pos == 0)
+		return ;
+	half = len / 2;
+	if (pos <= half)
+	{
+		while (pos-- > 0)
+			rotate(stack, stack_name);
+	}
+	else
+	{
+		pos = len - pos;
+		while (pos-- > 0)
+			reverse_rotate(stack, stack_name);
+	}
 }
 
-int calculate_move_cost(t_stack_node *a, t_stack_node *b, int value) {
-    int pos_in_a = find_best_insert_position(a, value);
-    int pos_in_b = get_position(b, value);
-    int len_a = stack_len(a);
-    int len_b = stack_len(b);
+void	reintegrate_sorted(t_stack_node **a, t_stack_node **b)
+{
+	t_stack_node	*best;
 
-    int move_b;
-    if (pos_in_b <= len_b / 2) {
-        move_b = pos_in_b;
-    } else {
-        move_b = len_b - pos_in_b;
-    }
-
-    int move_a;
-    if (pos_in_a <= len_a / 2) {
-        move_a = pos_in_a;
-    } else {
-        move_a = len_a - pos_in_a;
-    }
-
-    return move_a + move_b;
+	while (*b)
+	{
+		best = find_best_element_to_move(*a, *b);
+		move_to_position(b, get_position(*b, best->data), 'b');
+		move_to_position(a, find_best_insert_position(*a, best->data), 'a');
+		pa(a, b);
+	}
+	rotate_until_top(a, find_min(*a)->data, 'a');
 }
 
-t_stack_node *find_best_element_to_move(t_stack_node *a, t_stack_node *b) {
-    t_stack_node *best = b;
-    t_stack_node *current = b;
-    int min_cost = calculate_move_cost(a, b, current->data);
+/* Push sorted chunks into `b`
+ * Sort remaining 3 elements in `a`
+ * Efficiently reintegrate sorted elements from `b` to `a`*/
+void	sorter(t_stack_node **a, t_stack_node **b)
+{
+	int	size;
 
-    while (current) {
-        int cost = calculate_move_cost(a, b, current->data);
-        if (cost < min_cost) {
-            min_cost = cost;
-            best = current;
-        }
-        current = current->next;
-    }
-
-    return best;
+	size = stack_len(*a);
+	parse_b(a, b, size);
+	little_sort(a);
+	reintegrate_sorted(a, b);
 }
-
-void move_to_position(t_stack_node **stack, int pos, char stack_name) { 
-    int len = stack_len(*stack);
-    if (pos == 0) return;
-
-    int half = len / 2;
-    if (pos <= half) {
-        while (pos-- > 0)
-            rotate(stack, stack_name);
-    } else {
-        pos = len - pos;
-        while (pos-- > 0)
-            reverse_rotate(stack, stack_name);
-    }
-}
-
-
-void reintegrate_sorted(t_stack_node **a, t_stack_node **b) {
-    while (*b) {
-        t_stack_node *best = find_best_element_to_move(*a, *b);
-        move_to_position(b, get_position(*b, best->data), 'b');
-        move_to_position(a, find_best_insert_position(*a, best->data), 'a');
-        pa(a, b);
-    }
-
-    // Ensure final stack is sorted
-    rotate_until_top(a, find_min(*a)->data, 'a');
-}
-
-void sorter(t_stack_node **a, t_stack_node **b) {
-    int size = stack_len(*a);
-    
-    // Push sorted chunks into `b`
-    parse_b(a, b, size);
-    
-    // Sort remaining 3 elements in `a`
-    little_sort(a);
-    
-    // Efficiently reintegrate sorted elements from `b` to `a`
-    reintegrate_sorted(a, b);
-}
-

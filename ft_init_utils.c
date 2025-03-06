@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 13:53:57 by hvby              #+#    #+#             */
+/*   Updated: 2025/03/06 21:29:10 by Hadia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int ft_is_valid_number(char *av)
+int	ft_is_valid_number(char *av)
 {
-	int i;
-	long n;
+	int		i;
+	long	n;
 
 	i = 0;
-	if(av[i] == '-' || av[i] == '+')
+	if (av[i] == '-' || av[i] == '+')
 		i++;
-	while(av[i])
+	while (av[i])
 	{
 		if (!ft_isdigit(av[i]))
 			return (0);
@@ -20,28 +32,13 @@ int ft_is_valid_number(char *av)
 	return (1);
 }
 
-t_stack_node *find_last_node(t_stack_node *stack) {
-    while (stack && stack->next)
-        stack = stack->next;
-    return (stack);
-}
-
-void free_stack(t_stack_node **stack) {
-    t_stack_node *temp;
-    while (*stack) {
-        temp = *stack;
-        *stack = (*stack)->next;
-        free(temp);
-    }
-}
-
-void add_node(t_stack_node **stack, int n)
+void	add_node(t_stack_node **stack, int n)
 {
-	t_stack_node *new_node;
-	t_stack_node *last_node;
+	t_stack_node	*new_node;
+	t_stack_node	*last_node;
 
 	if (!stack)
-		return;
+		return ;
 	new_node = malloc(sizeof(t_stack_node));
 	if (!new_node)
 		return ;
@@ -52,7 +49,7 @@ void add_node(t_stack_node **stack, int n)
 		*stack = new_node;
 		new_node->prev = NULL;
 	}
-	else 
+	else
 	{
 		last_node = find_last_node(*stack);
 		last_node->next = new_node;
@@ -60,13 +57,16 @@ void add_node(t_stack_node **stack, int n)
 	}
 }
 
-int check_doubl(t_stack_node *stack, int n) {
-    t_stack_node *current = stack;
+int	check_doubl(t_stack_node *stack, int n)
+{
+	t_stack_node	*current;
 
-    while (current) {
-        if (current->data == n)
-            return (0); // Doublon détecté
-        current = current->next;
-    }
-    return (1); // Aucun doublon
+	current = stack;
+	while (current)
+	{
+		if (current->data == n)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:54 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/06 22:15:25 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/10 14:23:00 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ typedef struct s_stack_node
 	struct s_stack_node	*prev;
 }					t_stack_node;
 
-//function check input
 int ft_is_valid_number(char *av);
 int check_doubl(t_stack_node *stack, int n);
-//function initialisation pile
 
-//function initialisation node
+
+
 void add_node(t_stack_node **stack, int n);
 void init_stack_a(t_stack_node **a, char **av);
-//function utils
+
 t_stack_node *find_last_node(t_stack_node *stack);
 void free_stack(t_stack_node **stack);
 int stack_len(t_stack_node *stack);
@@ -54,7 +53,6 @@ char	*ft_empty_substr(void);
 size_t	ft_strlen(const char *s);
 t_stack_node	*get_second_last_node(t_stack_node *stack);
 
-//function sort
 void	sa(t_stack_node **a);
 void	ra(t_stack_node **a);
 void	rb(t_stack_node **b);
@@ -70,16 +68,16 @@ void	index_stack(t_stack_node *stack);
 void	sorter(t_stack_node **a, t_stack_node **b);
 t_stack_node	*find_max(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
+t_stack_node	*get_last(t_stack_node *stack);
+t_stack_node	*find_best_element_to_move(t_stack_node *a, t_stack_node *b);
 
 int	calculate_move_cost(t_stack_node *a, t_stack_node *b, int value);
 int	get_position(t_stack_node *stack, int value);
-t_stack_node	*find_best_element_to_move(t_stack_node *a, t_stack_node *b);
-int	find_best_insert_position(t_stack_node *a, int value);
 void	reintegrate_sorted(t_stack_node **a, t_stack_node **b);
 void	parse_b(t_stack_node **a, t_stack_node **b, int size);
 void	reverse_rotate(t_stack_node **stack, char stack_name);
+int	find_best_insert_position(t_stack_node *a, int value);
 void	rotate_until_bottom(t_stack_node **stack, int value, char stack_name);
 void	rotate_until_top(t_stack_node **stack, int value, char stack_name);
 void	rotate(t_stack_node **stack, char stack_name);
-t_stack_node	*get_last(t_stack_node *stack);
 #endif

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:37:14 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/20 16:13:16 by hadia            ###   ########.fr       */
+/*   Updated: 2025/03/10 13:57:14 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 static void	ft_free_tab(char **tab)
 {
 	int	i;
-	
+
 	i = 0;
 	while (tab[i])
 	{
@@ -46,6 +47,7 @@ static int	ft_count_word(char *s, char c)
 	}
 	return (count);
 }
+
 static int	write_split(char **tab, char const *s, char c)
 {
 	int	start;

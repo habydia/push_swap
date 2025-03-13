@@ -1,7 +1,5 @@
 #include "push_swap.h"
 
-//initialiation functions (creat pile...)
-
 void init_stack_a(t_stack_node **a, char **av)
 {
 	int i = 0;

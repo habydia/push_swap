@@ -20,13 +20,15 @@ int ft_is_valid_number(char *av)
 	return (1);
 }
 
-t_stack_node *find_last_node(t_stack_node *stack) {
+t_stack_node *find_last_node(t_stack_node *stack)
+{
     while (stack && stack->next)
         stack = stack->next;
     return (stack);
 }
 
-void free_stack(t_stack_node **stack) {
+void free_stack(t_stack_node **stack)
+{
     t_stack_node *temp;
     while (*stack) {
         temp = *stack;
@@ -65,8 +67,8 @@ int check_doubl(t_stack_node *stack, int n) {
 
     while (current) {
         if (current->data == n)
-            return (0); // Doublon détecté
+            return (0);
         current = current->next;
     }
-    return (1); // Aucun doublon
+    return (1);
 }

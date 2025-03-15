@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sorter_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 18:17:12 by hadia             #+#    #+#             */
+/*   Updated: 2025/03/15 18:17:15 by hadia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int stack_is_sorted(t_stack_node *stack)
+int	stack_is_sorted(t_stack_node *stack)
 {
 	while (stack && stack->next)
 	{
@@ -11,19 +23,19 @@ int stack_is_sorted(t_stack_node *stack)
 	return (1);
 }
 
-t_stack_node *get_last(t_stack_node *stack)
+t_stack_node	*get_last(t_stack_node *stack)
 {
-    if (!stack)
-        return NULL;
-    while (stack->next)
-        stack = stack->next;
-    return stack;
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
 }
 
-//stack_len
-int stack_len(t_stack_node *stack)
+// stack_len
+int	stack_len(t_stack_node *stack)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (stack)
@@ -33,5 +45,3 @@ int stack_len(t_stack_node *stack)
 	}
 	return (i);
 }
-
-

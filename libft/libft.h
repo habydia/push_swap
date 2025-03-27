@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:58:09 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/20 11:30:12 by hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 16:52:46 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void				*ft_memset(void *s, int c, size_t n);
 int					ft_isalpha(int c);
 size_t				ft_strlen(const char *s);
 int					ft_isdigit(int c);
-int					ft_atoi(const char *nptr);
+long				ft_atoi(const char *nptr);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 size_t				ft_strlcpy(char *dst, const char *src, size_t n);
@@ -69,6 +69,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
+void				ft_free_tab(char **tab);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 

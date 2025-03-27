@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:26 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/06 22:17:47 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 15:32:37 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	get_closest_to_min_or_max(t_stack_node *a, t_stack_node *b)
 	int				dist_min;
 	int				dist_max;
 
-	if (!a || !b)
-		return (0);
+	// if (!a || !b)
+	// 	return (0);
 	min_b = find_min(b);
 	max_b = find_max(b);
 	dist_min = abs(a->data - min_b->data);
@@ -51,6 +51,9 @@ void	parse_b(t_stack_node **a, t_stack_node **b, int size)
 	int	chunk_size;
 
 	chunk_size = size / 5;
+	if (chunk_size < 1)
+	chunk_size = 1;
+
 	min = find_min(*a)->data;
 	pivot = min + chunk_size;
 	pushed = 0;

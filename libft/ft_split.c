@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:37:14 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/10 13:57:14 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 16:52:06 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_free_tab(char **tab)
+void	ft_free_tab(char **tab)
 {
 	int	i;
 

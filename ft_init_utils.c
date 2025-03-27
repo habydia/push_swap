@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:57 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/25 00:01:19 by hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 16:39:20 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	ft_is_valid_number(char *av)
 	i = 0;
 	if (av[i] == '-' || av[i] == '+')
 		i++;
+	if (!av[i])
+        return (0);
 	while (av[i])
 	{
 		if (!ft_isdigit(av[i]))
 		{
-			// write(1, "Error\n", 6);
 			return (0);
 		}
 		i++;
@@ -32,7 +33,6 @@ int	ft_is_valid_number(char *av)
 	n = ft_atoi(av);
 	if (n < INT_MIN || n > INT_MAX)
 	{
-		// write(1, "Error\n", 6);
 		return (0);
 	}
 	return (1);
@@ -71,10 +71,7 @@ int	check_doubl(t_stack_node *stack, int n)
 	while (current)
 	{
 		if (current->data == n)
-		{
-			write(1, "Error\n", 6);
-			// return (0);
-		}
+			return (0);
 		current = current->next;
 	}
 	return (1);

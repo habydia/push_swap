@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:53 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/25 00:01:28 by hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 17:32:27 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,21 @@ void	init_stack_a(t_stack_node **a, char **av)
 
 	i = 0;
 	while (av[i])
-	{
-		if (!(ft_is_valid_number(av[i])))
-		{
-			write(1, "Error\n", 6);
-			free_stack(a);
-		}
-		data = ft_atoi(av[i]);
-		if (!check_doubl(*a, data))
-			free_stack(a);
-		add_node(a, data);
-		i++;
-	}
+{
+    if (!(ft_is_valid_number(av[i])))
+    {
+        write(2, "Error\n", 6);
+        free_stack(a);
+        exit(1);
+    }
+    data = ft_atoi(av[i]);
+    if (!check_doubl(*a, data))
+    {
+        write(2, "Error\n", 6);
+        free_stack(a);
+        exit(1);
+    }
+    add_node(a, data);
+    i++;
+}
 }

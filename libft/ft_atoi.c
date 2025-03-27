@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadia <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:02:19 by hadia             #+#    #+#             */
-/*   Updated: 2024/11/20 16:07:25 by hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 16:26:34 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
 
 static int	ft_check_sign(const char c, int *i)
 {
@@ -25,7 +25,7 @@ static int	ft_check_sign(const char c, int *i)
 	return (sign);
 }
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
 	int		i;
 	long	r;

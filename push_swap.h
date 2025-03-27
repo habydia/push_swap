@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:54 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/10 14:23:00 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 17:37:40 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void					handle_rotation(t_stack_node **a, int *pushed,
 							int *pivot, int chunk_size);
 
 char					**ft_split(char const *s, char c);
-int						ft_atoi(const char *nptr);
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
 char					*ft_empty_substr(void);

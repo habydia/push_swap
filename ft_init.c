@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:53 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/27 17:32:27 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 19:09:30 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	init_stack_a(t_stack_node **a, char **av)
     if (!(ft_is_valid_number(av[i])))
     {
         write(2, "Error\n", 6);
+		ft_free_tab(av);
         free_stack(a);
         exit(1);
     }
@@ -103,6 +104,7 @@ void	init_stack_a(t_stack_node **a, char **av)
     if (!check_doubl(*a, data))
     {
         write(2, "Error\n", 6);
+		ft_free_tab(av);
         free_stack(a);
         exit(1);
     }

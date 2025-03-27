@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:47 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/27 18:05:21 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/27 18:21:55 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char **argv)
 	else if (argc == 2)
 	{
 		av = ft_split(argv[1], ' ');
+		if (!av)
+			return (1);
 		s_flag = 1;
 	}
 	else

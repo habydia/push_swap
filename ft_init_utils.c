@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:57 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/27 16:39:20 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/28 14:41:02 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_is_valid_number(char *av)
 	if (av[i] == '-' || av[i] == '+')
 		i++;
 	if (!av[i])
-        return (0);
+		return (0);
 	while (av[i])
 	{
 		if (!ft_isdigit(av[i]))
@@ -32,9 +32,7 @@ int	ft_is_valid_number(char *av)
 	}
 	n = ft_atoi(av);
 	if (n < INT_MIN || n > INT_MAX)
-	{
 		return (0);
-	}
 	return (1);
 }
 

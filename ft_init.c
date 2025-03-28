@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:53 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/27 19:09:30 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/28 14:40:16 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,23 @@ void	init_stack_a(t_stack_node **a, char **av)
 
 	i = 0;
 	while (av[i])
-{
-    if (!(ft_is_valid_number(av[i])))
-    {
-        write(2, "Error\n", 6);
-		ft_free_tab(av);
-        free_stack(a);
-        exit(1);
-    }
-    data = ft_atoi(av[i]);
-    if (!check_doubl(*a, data))
-    {
-        write(2, "Error\n", 6);
-		ft_free_tab(av);
-        free_stack(a);
-        exit(1);
-    }
-    add_node(a, data);
-    i++;
-}
+	{
+		if (!(ft_is_valid_number(av[i])))
+		{
+			write(2, "Error\n", 6);
+			ft_free_tab(av);
+			free_stack(a);
+			exit(1);
+		}
+		data = ft_atoi(av[i]);
+		if (!check_doubl(*a, data))
+		{
+			write(2, "Error\n", 6);
+			ft_free_tab(av);
+			free_stack(a);
+			exit(1);
+		}
+		add_node(a, data);
+		i++;
+	}
 }

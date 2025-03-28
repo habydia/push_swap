@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:02:19 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/27 16:26:34 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/28 14:29:44 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 static int	ft_check_sign(const char c, int *i)
 {
@@ -39,12 +40,9 @@ long	ft_atoi(const char *nptr)
 	sign = ft_check_sign(nptr[i], &i);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		if ((r * 10 + (nptr[i] - '0')) < r)
+		if ((r * sign) < INT_MIN || (r * sign) > INT_MAX)
 		{
-			if (sign == 1)
-				return (-1);
-			else
-				return (0);
+			return (r * sign);
 		}
 		r = r * 10 + (nptr[i] - '0');
 		i++;

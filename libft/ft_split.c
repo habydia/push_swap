@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:37:14 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/27 16:52:06 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/28 14:08:30 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static int	write_split(char **tab, char const *s, char c)
 	return (1);
 }
 
-/*fonction check securite malloc, gere overflow*/
 char	**ft_split(char const *s, char c)
 {
 	size_t	words;
@@ -96,7 +95,6 @@ char	**ft_split(char const *s, char c)
 	tab[words] = NULL;
 	return (tab);
 }
-
 /*int main(int argc, char **argv)
 {
 		if (argc != 3)

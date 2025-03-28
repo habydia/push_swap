@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:47 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/27 18:21:55 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/28 14:39:22 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_stack_node	*a;
 	t_stack_node	*b;
 	char			**av;
-	int 			s_flag;
+	int				s_flag;
 
 	a = NULL;
 	b = NULL;
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 			sorter(&a, &b);
 	}
 	free_stack(&a);
-	if(s_flag)
-	ft_free_tab(av);
+	if (s_flag)
+		ft_free_tab(av);
 	return (0);
 }

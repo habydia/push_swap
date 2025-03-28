@@ -71,7 +71,7 @@ int	stack_len(t_stack_node *stack)
 }
 
 void	handle_push_to_b(t_stack_node **a, t_stack_node **b, int pivot,
-	int chunk_size)
+		int chunk_size)
 {
 	pb(a, b);
 	if (*b && stack_len(*b) > 1 && (*b)->data < pivot - (chunk_size / 2))

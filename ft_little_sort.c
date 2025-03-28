@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_little_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:47 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/06 22:17:23 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/28 14:44:49 by hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_stack(t_stack_node **stack)
 }
 
 void	handle_rotation(t_stack_node **a, int *pushed, int *pivot,
-	int chunk_size)
+		int chunk_size)
 {
 	if (*pushed < chunk_size)
 		rotate(a, 'a');

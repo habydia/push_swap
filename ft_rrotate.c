@@ -13,8 +13,8 @@
 #include "push_swap.h"
 
 /* Case 1: If value is smaller than the smallest element, insert before min
-* Case 2: If value is larger than the largest element, insert after max
-* Case 3: Find position between two elements */
+ * Case 2: If value is larger than the largest element, insert after max
+ * Case 3: Find position between two elements */
 
 int	find_best_insert_position(t_stack_node *a, int value)
 {

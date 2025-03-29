@@ -6,11 +6,34 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:26 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/27 15:32:37 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/29 07:37:21 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	debug_print_stacks(t_stack_node *a, t_stack_node *b)
+{
+	t_stack_node	*tmp;
+
+	write(2, "Stack A: ", 9);
+	tmp = a;
+	while (tmp)
+	{
+		ft_putnbr_fd(tmp->data, 2);
+		write(2, " ", 1);
+		tmp = tmp->next;
+	}
+	write(2, "\nStack B: ", 10);
+	tmp = b;
+	while (tmp)
+	{
+		ft_putnbr_fd(tmp->data, 2);
+		write(2, " ", 1);
+		tmp = tmp->next;
+	}
+	write(2, "\n", 1);
+}
 
 /*
  * Aucun élément à comparer
@@ -18,26 +41,6 @@
  * a est le nouveau max
  * a n'est ni le min ni le max
  */
-
-/*Plus proche du min
- Plus proche du max */
-int	get_closest_to_min_or_max(t_stack_node *a, t_stack_node *b)
-{
-	t_stack_node	*min_b;
-	t_stack_node	*max_b;
-	int				dist_min;
-	int				dist_max;
-
-	// if (!a || !b)
-	// 	return (0);
-	min_b = find_min(b);
-	max_b = find_max(b);
-	dist_min = abs(a->data - min_b->data);
-	dist_max = abs(a->data - max_b->data);
-	if (dist_min < dist_max)
-		return (-1);
-	return (1);
-}
 
 /* Keep smaller elements lower
  * Rotate only if we haven’t pushed enough
@@ -52,8 +55,7 @@ void	parse_b(t_stack_node **a, t_stack_node **b, int size)
 
 	chunk_size = size / 5;
 	if (chunk_size < 1)
-	chunk_size = 1;
-
+		chunk_size = 1;
 	min = find_min(*a)->data;
 	pivot = min + chunk_size;
 	pushed = 0;

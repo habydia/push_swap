@@ -6,10 +6,11 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:02:19 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/27 16:26:34 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/29 07:54:14 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 static int	ft_check_sign(const char c, int *i)
 {

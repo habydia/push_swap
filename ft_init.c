@@ -92,23 +92,23 @@ void	init_stack_a(t_stack_node **a, char **av)
 
 	i = 0;
 	while (av[i])
-{
-    if (!(ft_is_valid_number(av[i])))
-    {
-        write(2, "Error\n", 6);
-		ft_free_tab(av);
-        free_stack(a);
-        exit(1);
-    }
-    data = ft_atoi(av[i]);
-    if (!check_doubl(*a, data))
-    {
-        write(2, "Error\n", 6);
-		ft_free_tab(av);
-        free_stack(a);
-        exit(1);
-    }
-    add_node(a, data);
-    i++;
-}
+	{
+		if (!(ft_is_valid_number(av[i])))
+		{
+			write(2, "Error\n", 6);
+			ft_free_tab(av);
+			free_stack(a);
+			exit(1);
+		}
+		data = ft_atoi(av[i]);
+		if (!check_doubl(*a, data))
+		{
+			write(2, "Error\n", 6);
+			ft_free_tab(av);
+			free_stack(a);
+			exit(1);
+		}
+		add_node(a, data);
+		i++;
+	}
 }

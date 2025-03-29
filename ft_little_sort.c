@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:47 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/06 22:17:23 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/29 07:52:42 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ void	free_stack(t_stack_node **stack)
 }
 
 void	handle_rotation(t_stack_node **a, int *pushed, int *pivot,
-	int chunk_size)
+		int chunk_size)
 {
 	if (*pushed < chunk_size)
+	{
 		rotate(a, 'a');
+		if ((*a)->data > *pivot && *pushed == 0)
+		{
+			*pivot += chunk_size;
+		}
+	}
 	else
 	{
 		*pivot += chunk_size;

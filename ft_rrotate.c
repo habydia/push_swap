@@ -6,15 +6,15 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:41 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/06 21:22:28 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/03/29 07:23:54 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* Case 1: If value is smaller than the smallest element, insert before min
-* Case 2: If value is larger than the largest element, insert after max
-* Case 3: Find position between two elements */
+ * Case 2: If value is larger than the largest element, insert after max
+ * Case 3: Find position between two elements */
 
 int	find_best_insert_position(t_stack_node *a, int value)
 {
@@ -102,12 +102,16 @@ void	rotate_until_top(t_stack_node **stack, int value, char stack_name)
 	int	half;
 
 	position = get_position(*stack, value);
+	if (position == -1)
+		return ;
 	stack_size = stack_len(*stack);
 	half = stack_size / 2;
 	if (position <= half)
 	{
 		while ((*stack)->data != value)
+		{
 			rotate(stack, stack_name);
+		}
 	}
 	else
 	{

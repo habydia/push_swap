@@ -21,7 +21,7 @@ int	ft_is_valid_number(char *av)
 	if (av[i] == '-' || av[i] == '+')
 		i++;
 	if (!av[i])
-        return (0);
+		return (0);
 	while (av[i])
 	{
 		if (!ft_isdigit(av[i]))

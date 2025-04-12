@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:47 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/29 07:47:16 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/04/12 17:26:38 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	av = parse_args(argc, argv, &s_flag);
 	if (!av)
 		return (1);
-	init_stack_a(&a, av);
+	init_stack_a(&a, av, s_flag);
 	if (!stack_is_sorted(a))
 	{
 		if (stack_len(a) <= 3)

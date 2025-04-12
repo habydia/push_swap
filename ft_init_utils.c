@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:57 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/27 16:39:20 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/04/12 17:02:58 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int	check_doubl(t_stack_node *stack, int n)
 	while (current)
 	{
 		if (current->data == n)
+		{
+			free_stack(&stack);
 			return (0);
+		}
 		current = current->next;
 	}
 	return (1);

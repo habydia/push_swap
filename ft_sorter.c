@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sorter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:26 by hvby              #+#    #+#             */
-/*   Updated: 2025/04/12 12:13:58 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/04/12 17:52:44 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,27 @@ void	debug_print_stacks(t_stack_node *a, t_stack_node *b)
  * Rotate only if we haven’t pushed enough
  * Move to the next chunk
  * Reset counter for next chunk */
-void parse_b(t_stack_node **a, t_stack_node **b)
+void	parse_b(t_stack_node **a, t_stack_node **b, int size, int total_chunks)
 {
-int size = stack_len(*a);
-int chunk_count = 0;
-int total_chunks = 5;
-int min_val, max_val, range;
-int bounds[2];
+	int	chunk_count;
+	int	bounds[2];
+	int	min_val;
+	int	max_val;
+	int	range;
 
-min_val = find_min(*a)->data;
-max_val = find_max(*a)->data;
-range = max_val - min_val;
-
-while (stack_len(*a) > 3)
-{
-bounds[0] = min_val + (range * chunk_count / total_chunks);
-bounds[1] = min_val + (range * (chunk_count + 1) / total_chunks);
-
-if (process_chunk(a, b, bounds, &size))
-chunk_count++;
-
-if (chunk_count >= total_chunks && stack_len(*a) > 3)
-handle_remaining(a, b, &size);
-}
+	chunk_count = 0;
+	min_val = find_min(*a)->data;
+	max_val = find_max(*a)->data;
+	range = max_val - min_val;
+	while (stack_len(*a) > 3)
+	{
+		bounds[0] = min_val + (range * chunk_count / total_chunks);
+		bounds[1] = min_val + (range * (chunk_count + 1) / total_chunks);
+		if (process_chunk(a, b, bounds, &size))
+			chunk_count++;
+		if (chunk_count >= total_chunks && stack_len(*a) > 3)
+			handle_remaining(a, b, &size);
+	}
 }
 
 void	move_to_position(t_stack_node **stack, int pos, char stack_name)
@@ -112,7 +110,12 @@ void	reintegrate_sorted(t_stack_node **a, t_stack_node **b)
  * Efficiently reintegrate sorted elements from `b` to `a`*/
 void	sorter(t_stack_node **a, t_stack_node **b)
 {
-	parse_b(a, b);
+	int	size;
+	int	total_chunks;
+
+	size = stack_len(*a);
+	total_chunks = 5;
+	parse_b(a, b, size, total_chunks);
 	little_sort(a);
 	reintegrate_sorted(a, b);
 }

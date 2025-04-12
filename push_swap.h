@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Hadia <hadia@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:54 by hadia             #+#    #+#             */
-/*   Updated: 2025/04/12 12:20:11 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/04/12 17:53:25 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int						ft_is_valid_number(char *av);
 int						check_doubl(t_stack_node *stack, int n);
 
 void					add_node(t_stack_node **stack, int n);
-void					init_stack_a(t_stack_node **a, char **av);
+void					init_stack_a(t_stack_node **a, char **av, int s_flag);
 
 t_stack_node			*find_last_node(t_stack_node *stack);
 void					free_stack(t_stack_node **stack);
@@ -80,7 +80,8 @@ int						calculate_move_cost(t_stack_node *a, t_stack_node *b,
 							int value);
 int						get_position(t_stack_node *stack, int value);
 void					reintegrate_sorted(t_stack_node **a, t_stack_node **b);
-void					parse_b(t_stack_node **a, t_stack_node **b);
+void					parse_b(t_stack_node **a, t_stack_node **b, int size,
+							int total_chunks);
 void					reverse_rotate(t_stack_node **stack, char stack_name);
 int						find_best_insert_position(t_stack_node *a, int value);
 void					move_to_position(t_stack_node **stack, int pos,

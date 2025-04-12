@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:44:54 by hadia             #+#    #+#             */
-/*   Updated: 2025/03/27 17:37:40 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/04/12 12:20:11 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,21 @@ t_stack_node			*get_last(t_stack_node *stack);
 t_stack_node			*find_best_element_to_move(t_stack_node *a,
 							t_stack_node *b);
 
+int						process_one_element(t_stack_node **a, t_stack_node **b,
+							int bounds[2], int *size);
+int						process_chunk(t_stack_node **a, t_stack_node **b,
+							int bounds[2], int *size);
+void					handle_remaining(t_stack_node **a, t_stack_node **b,
+							int *size);
 int						calculate_move_cost(t_stack_node *a, t_stack_node *b,
 							int value);
 int						get_position(t_stack_node *stack, int value);
 void					reintegrate_sorted(t_stack_node **a, t_stack_node **b);
-void					parse_b(t_stack_node **a, t_stack_node **b, int size);
+void					parse_b(t_stack_node **a, t_stack_node **b);
 void					reverse_rotate(t_stack_node **stack, char stack_name);
 int						find_best_insert_position(t_stack_node *a, int value);
+void					move_to_position(t_stack_node **stack, int pos,
+							char stack_name);
 void					rotate_until_bottom(t_stack_node **stack, int value,
 							char stack_name);
 void					rotate_until_top(t_stack_node **stack, int value,

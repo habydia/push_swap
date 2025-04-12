@@ -6,7 +6,7 @@
 /*   By: Hadia <Hadia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:26 by hvby              #+#    #+#             */
-/*   Updated: 2025/03/29 07:37:21 by Hadia            ###   ########.fr       */
+/*   Updated: 2025/04/12 12:13:58 by Hadia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,29 @@ void	debug_print_stacks(t_stack_node *a, t_stack_node *b)
  * Rotate only if we haven’t pushed enough
  * Move to the next chunk
  * Reset counter for next chunk */
-void	parse_b(t_stack_node **a, t_stack_node **b, int size)
+void parse_b(t_stack_node **a, t_stack_node **b)
 {
-	int	min;
-	int	pivot;
-	int	pushed;
-	int	chunk_size;
+int size = stack_len(*a);
+int chunk_count = 0;
+int total_chunks = 5;
+int min_val, max_val, range;
+int bounds[2];
 
-	chunk_size = size / 5;
-	if (chunk_size < 1)
-		chunk_size = 1;
-	min = find_min(*a)->data;
-	pivot = min + chunk_size;
-	pushed = 0;
-	while (stack_len(*a) > 3)
-	{
-		if ((*a)->data <= pivot)
-		{
-			handle_push_to_b(a, b, pivot, chunk_size);
-			pushed++;
-		}
-		else
-			handle_rotation(a, &pushed, &pivot, chunk_size);
-	}
+min_val = find_min(*a)->data;
+max_val = find_max(*a)->data;
+range = max_val - min_val;
+
+while (stack_len(*a) > 3)
+{
+bounds[0] = min_val + (range * chunk_count / total_chunks);
+bounds[1] = min_val + (range * (chunk_count + 1) / total_chunks);
+
+if (process_chunk(a, b, bounds, &size))
+chunk_count++;
+
+if (chunk_count >= total_chunks && stack_len(*a) > 3)
+handle_remaining(a, b, &size);
+}
 }
 
 void	move_to_position(t_stack_node **stack, int pos, char stack_name)
@@ -112,10 +112,7 @@ void	reintegrate_sorted(t_stack_node **a, t_stack_node **b)
  * Efficiently reintegrate sorted elements from `b` to `a`*/
 void	sorter(t_stack_node **a, t_stack_node **b)
 {
-	int	size;
-
-	size = stack_len(*a);
-	parse_b(a, b, size);
+	parse_b(a, b);
 	little_sort(a);
 	reintegrate_sorted(a, b);
 }
